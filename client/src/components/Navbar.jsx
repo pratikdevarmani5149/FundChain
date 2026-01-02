@@ -15,34 +15,42 @@ const Navbar = () => {
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      
-      {/* Search Bar */}
+      <div className="flex items-center gap-3">
+        <img
+          src={logo}
+          alt="FundChain Logo"
+          className="w-[40px] h-[40px] object-contain cursor-pointer"
+          onClick={() => navigate('/')}
+        />
+        <span
+          className="text-white font-bold text-xl cursor-pointer"
+          onClick={() => navigate('/')}
+        >
+          FundChain
+        </span>
+      </div>
+
       <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
         <input
           type="text"
           placeholder="Search for campaigns"
           className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
         />
-        
         <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
           <img src={search} alt="search" className="w-[15px] h-[15px] object-contain" />
         </div>
       </div>
 
-      {/* Desktop Navigation */}
       <div className="sm:flex hidden flex-row justify-end gap-4">
-
-        {/* Wallet Button */}
         <CustomButton
           btnType="button"
-          title={address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connect Wallet"}
-          styles={address ? "bg-[#2c2f32]" : "bg-[#8c6dfd]"}
+          title={address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Connect Wallet'}
+          styles={address ? 'bg-[#2c2f32]' : 'bg-[#8c6dfd]'}
           handleClick={() => {
             if (!address) connect();
           }}
         />
 
-        {/* Create Campaign Button (only if connected) */}
         {address && (
           <CustomButton
             btnType="button"
@@ -59,11 +67,13 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Mobile Navigation */}
-      <div className="sm:hidden flex justify-between items-center relative">
-        
-        <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-          <img src={logo} alt="user" className="w-[60%] h-[60%] object-contain" />
+      <div className="sm:hidden flex justify-between items-center relative w-full">
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => navigate('/')}
+        >
+          <img src={logo} alt="FundChain Logo" className="w-[36px] h-[36px] object-contain" />
+          <span className="text-white font-bold text-lg">FundChain</span>
         </div>
 
         <img
@@ -73,9 +83,11 @@ const Navbar = () => {
           onClick={() => setToggleDrawer((prev) => !prev)}
         />
 
-        <div className={`absolute top-[60px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4 
-          ${!toggleDrawer ? '-translate-y-[100vh]' : 'translate-y-0'} transition-all duration-700`}>
-          
+        <div
+          className={`absolute top-[60px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4
+          ${!toggleDrawer ? '-translate-y-[100vh]' : 'translate-y-0'}
+          transition-all duration-700`}
+        >
           <ul className="mb-4">
             {navlinks.map((link) => (
               <li
@@ -90,23 +102,24 @@ const Navbar = () => {
                 <img
                   src={link.imgUrl}
                   alt={link.name}
-                  className={`w-[24px] h-[24px] object-contain 
-                    ${isActive === link.name ? 'grayscale-0' : 'grayscale'}`}
+                  className={`w-[24px] h-[24px] object-contain
+                  ${isActive === link.name ? 'grayscale-0' : 'grayscale'}`}
                 />
-                <p className={`ml-[20px] font-epilogue font-semibold text-[14px] 
-                  ${isActive === link.name ? 'text-[#1dc071]' : 'text-[#808191]'}`}>
+                <p
+                  className={`ml-[20px] font-epilogue font-semibold text-[14px]
+                  ${isActive === link.name ? 'text-[#1dc071]' : 'text-[#808191]'}`}
+                >
                   {link.name}
                 </p>
               </li>
             ))}
           </ul>
 
-          {/* Mobile Wallet Button */}
           <div className="flex mx-4 mb-3">
             <CustomButton
               btnType="button"
-              title={address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connect Wallet"}
-              styles={address ? "bg-[#2c2f32]" : "bg-[#8c6dfd]"}
+              title={address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Connect Wallet'}
+              styles={address ? 'bg-[#2c2f32]' : 'bg-[#8c6dfd]'}
               handleClick={() => {
                 if (!address) connect();
                 setToggleDrawer(false);
@@ -114,7 +127,6 @@ const Navbar = () => {
             />
           </div>
 
-          {/* Mobile Create Campaign */}
           {address && (
             <div className="flex mx-4">
               <CustomButton
@@ -129,7 +141,6 @@ const Navbar = () => {
             </div>
           )}
         </div>
-
       </div>
     </div>
   );
